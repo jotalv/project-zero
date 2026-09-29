@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
+import {useAuth} from './AuthContext';
+import {useNavigate} from 'react-router-dom';
 
-function Login({ onLogin }) {
+function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
+  const {login} = useAuth();
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault(); 
+    login(email);
+    navigate('/dashboard');
+  };
 
     console.log('E-mail digitado:', email);
     console.log('Senha digitada:', senha);
-
-    if (onLogin) {
-      onLogin();
-    }
-  };
 
   return (
     <div style={styles.container}>

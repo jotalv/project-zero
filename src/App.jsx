@@ -1,23 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
+import {Routes, Route} from 'react-router-dom';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
+import {AuthProvider} from './components/AuthContext';
+import {ProtectRoute} from './components/ProtectRoute';
 
 function App() {
-  const [estaLogado, setEstaLogado] = useState(false);
-
-  const realizarLogin = () => {
-    setEstaLogado(true);
-  };
-
   return (
-    <div>
-{estaLogado ? (
-  <Dashboard onLogout={() => setEstaLogado(false)} />
-) : (
-  <Login onLogin={realizarLogin} />
-)}
-    </div>
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<Login/>} />
+        <Route
+        path="/Dashboard"
+        element={
+          <ProtectRoute>
+            <Dashboard />
+          </ProtectRoute>
+        
+        }
+        />
+        </Routes>
+        </AuthProvider>
   );
 }
-
 export default App;

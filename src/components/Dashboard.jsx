@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // se voce esta lendo isso é por que ficou curioso né?
 // por enqaunto eu só foquei em fazer uma parte visual simples ok nada muito complexo .
 
@@ -13,6 +14,14 @@ function Dashboard() {
     logout();
     navigate('/', { replace: true });
   };
+=======
+import React from 'react';
+
+// se voce esta lendo isso é por que ficou curioso né?
+// por enqaunto eu só foquei em fazer uma parte visual simples ok nada muito complexo .
+
+function Dashboard({ onLogout }) {
+>>>>>>> f41c87ef1910cbe4e0256516b830551feb7bcf0e
   return (
     <div style={styles.container}>
       {/* Estrutura principal do Site/Jogo */}

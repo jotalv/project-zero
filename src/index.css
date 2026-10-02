@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap');
 
+@font-face {
+  font-family: 'CourbeSans';
+  src: url('./assets/fonts/CourbeSans.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --bg-void: #06040c;
   --panel-bg: #140c33;
@@ -21,7 +29,7 @@
   --neon-cyan-glow: rgba(53, 228, 255, 0.45);
   --neon-pink: #ff3d9e;
   --neon-pink-glow: rgba(255, 61, 158, 0.45);
-  --font-display: 'Orbitron', var(--font-mono);
+  --font-display: 'CourbeSans', 'Orbitron', var(--font-mono);
 }
 
 *, *::before, *::after {
@@ -58,8 +66,8 @@ input:focus {
 
 .menu-card:not(:disabled):hover {
   transform: translateY(-2px);
-  border-color: var(--accent);
-  box-shadow: 0 0 16px var(--accent-glow);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 16px var(--neon-cyan-glow);
 }
 
 /* ---- Tema neon (autenticação) ---- */
@@ -195,4 +203,134 @@ input:focus {
   margin-top: 18px;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+/* ---- Tema neon com arte real (assets do time de design) ---- */
+
+.art-panel {
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: clamp(24px, 8.8vw, 37px) clamp(44px, 15.5vw, 65px);
+  border-image-slice: 44 78 45 78 fill;
+  border-image-repeat: stretch;
+  padding: 8px 6px;
+}
+
+.art-field {
+  position: relative;
+  width: 100%;
+  height: 54px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin-bottom: 14px;
+}
+
+.art-field input {
+  position: absolute;
+  left: 3%;
+  right: 3%;
+  top: 50%;
+  height: 46%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  padding: 0 14px;
+  box-sizing: border-box;
+}
+
+.art-field input::placeholder {
+  color: rgba(231, 237, 244, 0.35);
+}
+
+.art-field-cadastro {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.art-field-cadastro input {
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  top: 8%;
+  height: 84%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--neon-bg);
+  font-family: var(--font-mono);
+  font-weight: bold;
+  font-size: 14px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.art-field-cadastro input::placeholder {
+  color: rgba(31, 15, 61, 0.45);
+}
+
+.art-button {
+  display: block;
+  width: 100%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.art-button img {
+  width: 100%;
+  display: block;
+}
+
+.art-button .hover-img {
+  display: none;
+}
+
+.art-button:hover .default-img {
+  display: none;
+}
+
+.art-button:hover .hover-img {
+  display: block;
+}
+
+.art-link {
+  display: inline-block;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.art-link img {
+  display: block;
+  height: 14px;
+}
+
+.art-link .underline-img {
+  display: none;
+  height: 4px;
+  margin-top: 2px;
+}
+
+.art-link:hover .underline-img {
+  display: block;
+}
+
+.game-border-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 5;
 }

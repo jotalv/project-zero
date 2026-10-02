@@ -78,19 +78,19 @@ function Profile() {
         <div style={styles.content}>
           <div style={styles.card}>
             <div style={styles.linha}>
-              <span style={styles.label}>NOME</span>
+              <span style={styles.label}>NOME//</span>
               <span style={styles.valor}>{perfil?.nome ?? usuario.email}</span>
             </div>
             <div style={styles.linha}>
-              <span style={styles.label}>E-MAIL</span>
+              <span style={styles.label}>E-MAIL//</span>
               <span style={styles.valor}>{usuario.email}</span>
             </div>
             <div style={styles.linha}>
-              <span style={styles.label}>NÍVEL</span>
+              <span style={styles.label}>NÍVEL//</span>
               <span style={styles.valor}>{perfil?.nivel ?? 1}</span>
             </div>
             <div style={styles.linha}>
-              <span style={styles.label}>CLASSE</span>
+              <span style={styles.label}>CLASSE//</span>
               <span style={styles.valor}>{perfil?.classe ?? 'Humano'}</span>
             </div>
 
@@ -100,7 +100,7 @@ function Profile() {
               </button>
             ) : (
               <form onSubmit={handleTrocarSenha} style={styles.formSenha}>
-                <label style={styles.label}>NOVA SENHA:</label>
+                <label style={styles.labelForm}>NOVA SENHA//</label>
                 <input
                   type="password"
                   value={novaSenha}
@@ -110,7 +110,7 @@ function Profile() {
                   required
                 />
 
-                <label style={{ ...styles.label, marginTop: '12px' }}>CONFIRMAR NOVA SENHA:</label>
+                <label style={{ ...styles.labelForm, marginTop: '12px' }}>CONFIRMAR NOVA SENHA//</label>
                 <input
                   type="password"
                   value={confirmarNovaSenha}
@@ -151,15 +151,15 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: '100vh',
-    backgroundColor: 'var(--bg-void)',
+    background: 'radial-gradient(circle at 50% 20%, #2a1552 0%, var(--neon-bg) 65%)',
     fontFamily: 'var(--font-mono)',
     padding: '20px',
     boxSizing: 'border-box',
   },
   window: {
-    backgroundColor: 'var(--panel-bg)',
-    border: '1px solid var(--accent)',
-    boxShadow: '0 0 15px var(--accent-glow)',
+    backgroundColor: 'var(--neon-panel)',
+    border: '2px solid var(--neon-frame)',
+    boxShadow: '0 0 10px rgba(74, 31, 143, 0.8), 0 0 40px rgba(53, 228, 255, 0.12)',
     width: '100%',
     maxWidth: '520px',
     minHeight: '420px',
@@ -169,31 +169,32 @@ const styles = {
     borderRadius: '6px',
   },
   topBar: {
-    backgroundColor: 'var(--panel-bg-alt)',
+    backgroundColor: 'rgba(53, 228, 255, 0.06)',
     padding: '12px 20px',
-    borderBottom: '1px solid var(--accent)',
+    borderBottom: '2px solid var(--neon-frame)',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderRadius: '6px 6px 0 0',
+    borderRadius: '4px 4px 0 0',
   },
   titulo: {
-    color: 'var(--accent)',
+    color: 'var(--neon-cyan)',
     margin: 0,
     fontSize: '18px',
     letterSpacing: '3px',
-    textShadow: '0 0 8px var(--accent-glow)',
+    fontFamily: 'var(--font-display)',
+    textShadow: '0 0 8px var(--neon-cyan-glow)',
   },
   voltarButton: {
-    backgroundColor: 'var(--bg-void)',
-    color: 'var(--accent)',
-    border: '1px solid var(--accent)',
+    backgroundColor: 'var(--neon-bg)',
+    color: 'var(--neon-pink)',
+    border: '1px solid var(--neon-pink)',
     borderRadius: '4px',
     padding: '6px 14px',
     cursor: 'pointer',
-    fontFamily: 'var(--font-mono)',
+    fontFamily: 'var(--font-display)',
     fontWeight: 'bold',
-    fontSize: '12px',
+    fontSize: '11px',
   },
   content: {
     flex: 1,
@@ -209,13 +210,22 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     padding: '10px 0',
-    borderBottom: '1px solid var(--panel-bg-alt)',
+    borderBottom: '1px solid rgba(53, 228, 255, 0.15)',
   },
   label: {
-    color: 'var(--text-muted)',
+    color: 'var(--neon-cyan)',
     fontSize: '12px',
     fontWeight: 'bold',
     letterSpacing: '1px',
+    fontFamily: 'var(--font-display)',
+  },
+  labelForm: {
+    display: 'block',
+    color: 'var(--neon-cyan)',
+    fontSize: '12px',
+    fontWeight: 'bold',
+    letterSpacing: '1px',
+    fontFamily: 'var(--font-display)',
   },
   valor: {
     color: 'var(--text-primary)',
@@ -225,15 +235,14 @@ const styles = {
     width: '100%',
     marginTop: '24px',
     padding: '12px',
-    backgroundColor: 'var(--accent)',
-    color: 'var(--panel-bg)',
+    background: 'linear-gradient(90deg, var(--neon-lime), var(--neon-cyan))',
+    color: '#0c0620',
     border: 'none',
-    borderRadius: '4px',
+    clipPath: 'polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%)',
     fontSize: '14px',
     fontWeight: 'bold',
     cursor: 'pointer',
-    fontFamily: 'var(--font-mono)',
-    boxShadow: '0 0 12px var(--accent-glow)',
+    fontFamily: 'var(--font-display)',
   },
   formSenha: {
     marginTop: '24px',
@@ -244,15 +253,14 @@ const styles = {
     width: '100%',
     padding: '10px',
     marginTop: '6px',
-    backgroundColor: 'var(--accent)',
-    border: '1px solid #2e3838',
-    borderRadius: '4px',
-    color: 'var(--panel-bg)',
+    backgroundColor: 'rgba(6, 4, 12, 0.4)',
+    border: '1px solid var(--neon-cyan)',
+    clipPath: 'polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%)',
+    color: 'var(--text-primary)',
     fontSize: '14px',
     outline: 'none',
     boxSizing: 'border-box',
     fontFamily: 'var(--font-mono)',
-    boxShadow: '0 0 8px var(--accent-glow)',
   },
   erro: {
     color: 'var(--danger)',
@@ -261,7 +269,7 @@ const styles = {
     textAlign: 'center',
   },
   sucesso: {
-    color: 'var(--accent)',
+    color: 'var(--neon-cyan)',
     fontSize: '12px',
     marginTop: '16px',
     textAlign: 'center',
@@ -274,26 +282,26 @@ const styles = {
   salvarButton: {
     flex: 1,
     padding: '10px',
-    backgroundColor: 'var(--accent)',
-    color: 'var(--panel-bg)',
+    background: 'linear-gradient(90deg, var(--neon-lime), var(--neon-cyan))',
+    color: '#0c0620',
     border: 'none',
-    borderRadius: '4px',
+    clipPath: 'polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%)',
     fontSize: '13px',
     fontWeight: 'bold',
     cursor: 'pointer',
-    fontFamily: 'var(--font-mono)',
+    fontFamily: 'var(--font-display)',
   },
   cancelarButton: {
     flex: 1,
     padding: '10px',
-    backgroundColor: 'var(--bg-void)',
-    color: 'var(--accent)',
-    border: '1px solid var(--accent)',
+    backgroundColor: 'var(--neon-bg)',
+    color: 'var(--neon-pink)',
+    border: '1px solid var(--neon-pink)',
     borderRadius: '4px',
     fontSize: '13px',
     fontWeight: 'bold',
     cursor: 'pointer',
-    fontFamily: 'var(--font-mono)',
+    fontFamily: 'var(--font-display)',
   },
 };
 

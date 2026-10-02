@@ -1,0 +1,49 @@
+:root {
+  --bg-void: #06040c;
+  --panel-bg: #140c33;
+  --panel-bg-alt: #1b1047;
+  --accent: #b9d0e1;
+  --accent-glow: rgba(185, 208, 225, 0.35);
+  --text-primary: #e7edf4;
+  --text-muted: #93a0ae;
+  --danger: #ff6b6b;
+  --font-mono: 'Courier New', Courier, monospace;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--bg-void);
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+}
+
+button {
+  transition: filter 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+button:hover {
+  filter: brightness(1.15);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+input:focus {
+  box-shadow: 0 0 0 2px var(--accent), 0 0 10px var(--accent-glow) !important;
+}
+
+.menu-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.menu-card:not(:disabled):hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
+}

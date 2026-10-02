@@ -60,11 +60,10 @@ function Home() {
           <h1 style={styles.logo}>PROJECT ZERO</h1>
 
           <div style={styles.enterWorldWrap}>
-            <button type="button" className="art-button" disabled style={{ cursor: 'not-allowed', opacity: 0.85 }}>
+            <button type="button" className="art-button" onClick={() => navigate('/mundo')}>
               <img src={enterWorldImg} alt="Entrar no mundo cyber" className="default-img" />
               <img src={enterWorldHoverImg} alt="" className="hover-img" />
             </button>
-            <p style={styles.emBreveEnterWorld}>EM BREVE</p>
           </div>
 
           <div style={styles.menu}>
@@ -167,13 +166,6 @@ const styles = {
   enterWorldWrap: {
     width: '100%',
     maxWidth: '420px',
-  },
-  emBreveEnterWorld: {
-    margin: '8px 0 0',
-    textAlign: 'center',
-    fontSize: '10px',
-    letterSpacing: '1px',
-    color: 'var(--text-muted)',
   },
   menu: {
     display: 'grid',

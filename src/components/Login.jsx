@@ -263,7 +263,7 @@ function Login() {
             <img
               src={tituloCadastro}
               alt="Novo por aqui? Cadastre-se"
-              style={{ position: 'absolute', top: '27.9%', left: '20.6%', width: '58.7%' }}
+              style={{ position: 'absolute', top: '27.9%', left: '20.6%', width: '58.7%' , color: '#FAFAFA'}}
             />
           </div>
 
@@ -445,6 +445,7 @@ const styles = {
   linhaLabel: {
     display: 'flex',
     alignItems: 'baseline',
+    justifyContent: 'space-between',
     gap: '10px',
     marginBottom: '6px',
     flexWrap: 'wrap',

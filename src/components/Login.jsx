@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const MENSAGENS_ERRO = {
   'Invalid login credentials': 'E-mail ou senha inválidos.',
   'User already registered': 'Já existe uma conta com esse e-mail.',
-  'email rate limit exceeded': 'Muitas tentativas de cadastro em pouco tempo. Aguarde alguns minutos e tente de novo.',
+  'email rate limit exceeded': 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.',
 };
 
 function traduzErro(mensagem) {
@@ -13,7 +13,7 @@ function traduzErro(mensagem) {
 }
 
 function Login() {
-  const [modo, setModo] = useState('login'); // 'login' | 'cadastro'
+  const [modo, setModo] = useState('login'); // 'login' | 'cadastro' | 'recuperar'
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -23,17 +23,41 @@ function Login() {
   const [aviso, setAviso] = useState('');
   const [enviando, setEnviando] = useState(false);
 
-  const { usuario, carregando, login, cadastrar } = useAuth();
+  const { usuario, carregando, modoRecuperacao, login, cadastrar, recuperarSenha, atualizarSenha } =
+    useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!carregando && usuario) {
+    if (!carregando && usuario && !modoRecuperacao) {
       navigate('/home', { replace: true });
     }
-  }, [usuario, carregando, navigate]);
+  }, [usuario, carregando, modoRecuperacao, navigate]);
+
+  const limparMensagens = () => {
+    setErro('');
+    setAviso('');
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (modo === 'recuperar') {
+      const emailLimpo = email.trim();
+      if (!emailLimpo) {
+        setErro('Informe um e-mail válido.');
+        return;
+      }
+      limparMensagens();
+      setEnviando(true);
+      const { error } = await recuperarSenha(emailLimpo);
+      setEnviando(false);
+      if (error) {
+        setErro(traduzErro(error.message));
+      } else {
+        setAviso('Link de recuperação enviado! Confira seu e-mail.');
+      }
+      return;
+    }
 
     const emailLimpo = email.trim();
     if (!emailLimpo) {
@@ -56,8 +80,7 @@ function Login() {
       }
     }
 
-    setErro('');
-    setAviso('');
+    limparMensagens();
     setEnviando(true);
 
     if (modo === 'login') {
@@ -82,204 +105,239 @@ function Login() {
     setEnviando(false);
   };
 
-  const alternarModo = () => {
-    setErro('');
-    setAviso('');
-    setModo((m) => (m === 'login' ? 'cadastro' : 'login'));
+  const handleDefinirNovaSenha = async (e) => {
+    e.preventDefault();
+
+    if (senha.length < 6) {
+      setErro('A senha precisa ter pelo menos 6 caracteres.');
+      return;
+    }
+    if (senha !== confirmarSenha) {
+      setErro('As senhas não coincidem.');
+      return;
+    }
+
+    limparMensagens();
+    setEnviando(true);
+    const { error } = await atualizarSenha(senha);
+    setEnviando(false);
+
+    if (error) {
+      setErro(error.message);
+    } else {
+      navigate('/home', { replace: true });
+    }
   };
 
+  const irPara = (novoModo) => {
+    limparMensagens();
+    setModo(novoModo);
+  };
+
+  if (modoRecuperacao) {
+    return (
+      <div className="neon-screen">
+        <div className="neon-panel">
+          <span className="neon-dot" />
+          <h2 className="neon-title">DEFINIR NOVA SENHA</h2>
+
+          <form onSubmit={handleDefinirNovaSenha}>
+            <div style={{ marginBottom: '16px' }}>
+              <label className="neon-label pink">
+                <span className="dot" />
+                NOVA SENHA//
+              </label>
+              <input
+                type={mostrarSenha ? 'text' : 'password'}
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
+                className="neon-input"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+
+            <div style={{ marginBottom: '16px' }}>
+              <label className="neon-label pink">
+                <span className="dot" />
+                CONFIRMAR SENHA//
+              </label>
+              <input
+                type={mostrarSenha ? 'text' : 'password'}
+                value={confirmarSenha}
+                onChange={(e) => setConfirmarSenha(e.target.value)}
+                className="neon-input"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+
+            {erro && <p style={styles.erro}>{erro}</p>}
+
+            <button type="submit" className="neon-button" disabled={enviando}>
+              {enviando ? 'SALVANDO...' : 'SALVAR NOVA SENHA'}
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <h2 style={styles.title}>[ SISTEMA INFECTADO ]</h2>
+    <div className="neon-screen">
+      <div className="neon-panel">
+        <span className="neon-dot" />
+        <h2 className="neon-title">
+          {modo === 'login' && 'ACESSO AO SISTEMA'}
+          {modo === 'cadastro' && 'NOVO POR AQUI? CADASTRE-SE'}
+          {modo === 'recuperar' && 'RECUPERAR SENHA'}
+        </h2>
 
         <form onSubmit={handleSubmit}>
           {modo === 'cadastro' && (
-            <div style={{ marginBottom: '15px' }}>
-              <label style={styles.label}>NOME DO AGENTE:</label>
+            <div style={{ marginBottom: '16px' }}>
+              <label className="neon-label lime">
+                <span className="dot" />
+                USER//
+              </label>
               <input
                 type="text"
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
-                style={styles.input}
+                className="neon-input"
                 placeholder="Agente Fantasma"
                 required
               />
             </div>
           )}
 
-          <div style={{ marginBottom: '15px' }}>
-            <label style={styles.label}>IDENTIFICAÇÃO (E-MAIL):</label>
+          <div style={{ marginBottom: '16px' }}>
+            <label className="neon-label lime">
+              <span className="dot" />
+              EMAIL//
+            </label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              style={styles.input}
+              className="neon-input"
               placeholder="agente@antivirus.net"
               required
             />
           </div>
 
-          <div style={{ marginBottom: '15px' }}>
-            <label style={styles.label}>CHAVE DE ACESSO (SENHA):</label>
-            <div style={styles.inputComBotao}>
-              <input
-                type={mostrarSenha ? 'text' : 'password'}
-                value={senha}
-                onChange={(e) => setSenha(e.target.value)}
-                style={{ ...styles.input, paddingRight: '70px' }}
-                placeholder="••••••••"
-                required
-              />
-              <button
-                type="button"
-                onClick={() => setMostrarSenha((v) => !v)}
-                style={styles.botaoMostrarSenha}
-              >
-                {mostrarSenha ? 'OCULTAR' : 'MOSTRAR'}
-              </button>
+          {modo !== 'recuperar' && (
+            <div style={{ marginBottom: '16px' }}>
+              <label className="neon-label pink">
+                <span className="dot" />
+                PASSWORD//
+              </label>
+              <div style={{ position: 'relative' }}>
+                <input
+                  type={mostrarSenha ? 'text' : 'password'}
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
+                  className="neon-input"
+                  style={{ paddingRight: '70px' }}
+                  placeholder="••••••••"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setMostrarSenha((v) => !v)}
+                  style={styles.botaoMostrarSenha}
+                >
+                  {mostrarSenha ? 'OCULTAR' : 'MOSTRAR'}
+                </button>
+              </div>
             </div>
-          </div>
+          )}
 
           {modo === 'cadastro' && (
-            <div style={{ marginBottom: '15px' }}>
-              <label style={styles.label}>CONFIRMAR SENHA:</label>
+            <div style={{ marginBottom: '16px' }}>
+              <label className="neon-label pink">
+                <span className="dot" />
+                CONFIRMAR PASSWORD//
+              </label>
               <input
                 type={mostrarSenha ? 'text' : 'password'}
                 value={confirmarSenha}
                 onChange={(e) => setConfirmarSenha(e.target.value)}
-                style={styles.input}
+                className="neon-input"
                 placeholder="••••••••"
                 required
               />
             </div>
           )}
 
+          {modo === 'login' && (
+            <button type="button" onClick={() => irPara('recuperar')} className="neon-link" style={{ display: 'block', marginBottom: '16px' }}>
+              ESQUECI A SENHA
+            </button>
+          )}
+
           {erro && <p style={styles.erro}>{erro}</p>}
           {aviso && <p style={styles.aviso}>{aviso}</p>}
 
-          <button type="submit" style={styles.button} disabled={enviando}>
-            {enviando ? 'PROCESSANDO...' : modo === 'login' ? 'INICIAR PURGAÇÃO' : 'REGISTRAR AGENTE'}
+          <button type="submit" className="neon-button" disabled={enviando}>
+            {enviando
+              ? 'PROCESSANDO...'
+              : modo === 'login'
+              ? 'ENTRAR'
+              : modo === 'cadastro'
+              ? 'CONTINUAR >'
+              : 'ENVIAR LINK'}
           </button>
         </form>
 
-        <button type="button" onClick={alternarModo} style={styles.linkAlternar}>
-          {modo === 'login' ? 'Não tem conta? Cadastre-se' : 'Já tem conta? Entrar'}
-        </button>
+        <div className="neon-footer">
+          {modo === 'recuperar' ? (
+            <button type="button" onClick={() => irPara('login')} className="neon-link">
+              VOLTAR
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => irPara(modo === 'login' ? 'cadastro' : 'login')}
+              className="neon-link"
+            >
+              {modo === 'login' ? 'Não tem conta? Cadastre-se' : 'Já tem conta? Entrar'}
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
 }
 
 const styles = {
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '100vh',
-    backgroundColor: 'var(--bg-void)',
-    fontFamily: 'var(--font-mono)',
-    padding: '20px',
-    boxSizing: 'border-box',
-  },
-  card: {
-    backgroundColor: 'var(--panel-bg)',
-    padding: '30px',
-    borderRadius: '6px',
-    border: '1px solid var(--accent)',
-    boxShadow: '0 0 15px var(--accent-glow)',
-    width: '100%',
-    maxWidth: '380px',
-    boxSizing: 'border-box',
-  },
-  title: {
-    color: 'var(--accent)',
-    textAlign: 'center',
-    marginBottom: '20px',
-    fontSize: '20px',
-    letterSpacing: '2px',
-    textShadow: '0 0 8px var(--accent-glow)',
-  },
   erro: {
     color: 'var(--danger)',
     fontSize: '12px',
-    marginTop: '-5px',
     marginBottom: '15px',
     textAlign: 'center',
   },
   aviso: {
-    color: 'var(--accent)',
+    color: 'var(--neon-cyan)',
     fontSize: '12px',
-    marginTop: '-5px',
     marginBottom: '15px',
     textAlign: 'center',
   },
-  label: {
-    display: 'block',
-    color: 'var(--accent)',
-    fontSize: '12px',
-    marginBottom: '6px',
-    fontWeight: 'bold',
-    letterSpacing: '1px',
-  },
-  input: {
-    width: '100%',
-    padding: '10px',
-    backgroundColor: 'var(--accent)',
-    border: '1px solid #2e3838',
-    borderRadius: '4px',
-    color: 'var(--panel-bg)',
-    fontSize: '14px',
-    outline: 'none',
-    boxSizing: 'border-box',
-    fontFamily: 'var(--font-mono)',
-    boxShadow: '0 0 8px var(--accent-glow)',
-  },
-  inputComBotao: {
-    position: 'relative',
-  },
   botaoMostrarSenha: {
     position: 'absolute',
-    right: '6px',
+    right: '10px',
     top: '50%',
     transform: 'translateY(-50%)',
     background: 'none',
     border: 'none',
-    color: 'var(--panel-bg)',
-    opacity: 0.6,
+    color: 'var(--neon-cyan)',
+    opacity: 0.8,
     fontSize: '10px',
     fontWeight: 'bold',
     letterSpacing: '0.5px',
     cursor: 'pointer',
     fontFamily: 'var(--font-mono)',
     padding: '4px 6px',
-  },
-  button: {
-    width: '100%',
-    padding: '12px',
-    backgroundColor: 'var(--accent)',
-    color: 'var(--panel-bg)',
-    border: 'none',
-    borderRadius: '4px',
-    fontSize: '14px',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    marginTop: '10px',
-    fontFamily: 'var(--font-mono)',
-    boxShadow: '0 0 12px var(--accent-glow)',
-  },
-  linkAlternar: {
-    display: 'block',
-    width: '100%',
-    marginTop: '16px',
-    background: 'none',
-    border: 'none',
-    color: 'var(--text-muted)',
-    fontSize: '12px',
-    fontFamily: 'var(--font-mono)',
-    cursor: 'pointer',
-    textDecoration: 'underline',
-    textAlign: 'center',
   },
 };
 

@@ -6,6 +6,7 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [usuario, setUsuario] = useState(null);
   const [carregando, setCarregando] = useState(true);
+  const [modoRecuperacao, setModoRecuperacao] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -13,8 +14,11 @@ export function AuthProvider({ children }) {
       setCarregando(false);
     });
 
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
       setUsuario(session?.user ?? null);
+      if (event === 'PASSWORD_RECOVERY') {
+        setModoRecuperacao(true);
+      }
     });
 
     return () => listener.subscription.unsubscribe();
@@ -38,11 +42,30 @@ export function AuthProvider({ children }) {
 
   const atualizarSenha = async (novaSenha) => {
     const { error } = await supabase.auth.updateUser({ password: novaSenha });
+    if (!error) setModoRecuperacao(false);
+    return { error };
+  };
+
+  const recuperarSenha = async (email) => {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + '/',
+    });
     return { error };
   };
 
   return (
-    <AuthContext.Provider value={{ usuario, carregando, login, cadastrar, logout, atualizarSenha }}>
+    <AuthContext.Provider
+      value={{
+        usuario,
+        carregando,
+        modoRecuperacao,
+        login,
+        cadastrar,
+        logout,
+        atualizarSenha,
+        recuperarSenha,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

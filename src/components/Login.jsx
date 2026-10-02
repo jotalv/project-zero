@@ -254,8 +254,8 @@ function Login() {
 
   if (modo === 'cadastro') {
     return (
-      <div className="neon-screen">
-        <div style={{ width: '100%', maxWidth: '400px' }}>
+      <div style={styles.telaCadastro}>
+        <div style={styles.colunaCadastro}>
           <img src={barraTopo} alt="" style={{ width: '100%', display: 'block' }} />
 
           <div style={{ position: 'relative' }}>
@@ -267,7 +267,17 @@ function Login() {
             />
           </div>
 
-          <form onSubmit={handleSubmit} style={{ background: 'var(--neon-bg)', padding: '12px 28px 24px' }}>
+          <form
+            onSubmit={handleSubmit}
+            style={{
+              flex: 1,
+              background: 'var(--neon-bg)',
+              padding: '12px 28px 24px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}
+          >
             <div style={{ marginBottom: '18px' }}>
               <div style={styles.linhaLabel}>
                 <img src={labelUserCadastro} alt="User" style={{ height: '26px' }} />
@@ -391,6 +401,19 @@ function Login() {
 }
 
 const styles = {
+  telaCadastro: {
+    display: 'flex',
+    minHeight: '100vh',
+    width: '100%',
+    background: 'var(--neon-bg)',
+  },
+  colunaCadastro: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    maxWidth: '480px',
+    margin: '0 auto',
+  },
   erro: {
     color: 'var(--danger)',
     fontSize: '12px',

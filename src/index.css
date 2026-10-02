@@ -212,7 +212,7 @@ input:focus {
   max-width: 420px;
   box-sizing: border-box;
   border-style: solid;
-  border-width: clamp(24px, 8.8vw, 37px) clamp(44px, 15.5vw, 65px);
+  border-width: clamp(24px, 8.8vw, 37px) clamp(44px, 15.5vw, 65px) clamp(38px, 13.5vw, 56px);
   border-image-slice: 44 78 45 78 fill;
   border-image-repeat: stretch;
   padding: 8px 6px;

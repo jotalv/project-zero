@@ -1,0 +1,267 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/battle.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vida"]
+bg_color = Color(1, 0.24, 0.43, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_energia"]
+bg_color = Color(0.207843, 0.890196, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_botao"]
+bg_color = Color(0.054902, 0.0392157, 0.113725, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.207843, 0.890196, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Battle" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Fundo" type="ColorRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.0941176, 0.0588235, 0.192157, 1)
+
+[node name="NomeInimigo" type="Label" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+offset_top = 20.0
+offset_bottom = 54.0
+theme_override_colors/font_color = Color(1, 0.24, 0.43, 1)
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+
+[node name="RetratoInimigo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 60.0
+offset_right = 370.0
+offset_bottom = 260.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LabelVidaInimigo" type="Label" parent="."]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 268.0
+offset_right = 200.0
+offset_bottom = 296.0
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.952941, 1)
+theme_override_font_sizes/font_size = 14
+text = "VIDA"
+
+[node name="VidaInimigo" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 268.0
+offset_right = 510.0
+offset_bottom = 298.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_vida")
+show_percentage = false
+
+[node name="LogLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 320.0
+offset_right = 520.0
+offset_bottom = 460.0
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.952941, 1)
+theme_override_font_sizes/font_size = 14
+autowrap_mode = 2
+vertical_alignment = 2
+
+[node name="ResultadoLabel" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 20.0
+offset_top = 400.0
+offset_right = 520.0
+offset_bottom = 440.0
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+text = "VITÓRIA!"
+
+[node name="NomeJogador" type="Label" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+offset_top = 480.0
+offset_bottom = 514.0
+theme_override_colors/font_color = Color(0.207843, 0.890196, 1, 1)
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+
+[node name="RetratoJogador" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 520.0
+offset_right = 370.0
+offset_bottom = 720.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LabelVidaJogador" type="Label" parent="."]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 728.0
+offset_right = 130.0
+offset_bottom = 756.0
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.952941, 1)
+theme_override_font_sizes/font_size = 14
+text = "VIDA"
+
+[node name="VidaJogador" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 135.0
+offset_top = 728.0
+offset_right = 480.0
+offset_bottom = 758.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_vida")
+show_percentage = false
+
+[node name="LabelEnergiaJogador" type="Label" parent="."]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 764.0
+offset_right = 130.0
+offset_bottom = 792.0
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.952941, 1)
+theme_override_font_sizes/font_size = 14
+text = "EN"
+
+[node name="EnergiaJogador" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 135.0
+offset_top = 764.0
+offset_right = 480.0
+offset_bottom = 788.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_energia")
+show_percentage = false
+
+[node name="BotaoAtacar" type="Button" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 850.0
+offset_right = 170.0
+offset_bottom = 920.0
+theme_override_colors/font_color = Color(0.207843, 0.890196, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_botao")
+text = "ATACAR"
+
+[node name="BotaoHabilidade" type="Button" parent="."]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 920.0
+theme_override_colors/font_color = Color(0.207843, 0.890196, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_botao")
+theme_override_font_sizes/font_size = 13
+text = "HABILIDADE"
+autowrap_mode = 2
+
+[node name="BotaoFugir" type="Button" parent="."]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 850.0
+offset_right = 530.0
+offset_bottom = 920.0
+theme_override_colors/font_color = Color(0.207843, 0.890196, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_botao")
+text = "FUGIR"
+
+[node name="BotaoContinuar" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 170.0
+offset_top = 850.0
+offset_right = 370.0
+offset_bottom = 920.0
+theme_override_colors/font_color = Color(0.207843, 0.890196, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_botao")
+text = "CONTINUAR"
+
+[node name="PainelDebug" type="Control" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Fundo" type="ColorRect" parent="PainelDebug"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.0941176, 0.0588235, 0.192157, 0.96)
+
+[node name="Titulo" type="Label" parent="PainelDebug"]
+layout_mode = 0
+anchor_right = 1.0
+offset_top = 220.0
+offset_bottom = 254.0
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.952941, 1)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+text = "MODO DEBUG"
+
+[node name="TituloPersonagem" type="Label" parent="PainelDebug"]
+layout_mode = 0
+anchor_right = 1.0
+offset_top = 300.0
+offset_bottom = 326.0
+theme_override_colors/font_color = Color(0.207843, 0.890196, 1, 1)
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+text = "PERSONAGEM"
+
+[node name="PersonagemOpcao" type="OptionButton" parent="PainelDebug"]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 334.0
+offset_right = 420.0
+offset_bottom = 370.0
+
+[node name="TituloInimigo" type="Label" parent="PainelDebug"]
+layout_mode = 0
+anchor_right = 1.0
+offset_top = 400.0
+offset_bottom = 426.0
+theme_override_colors/font_color = Color(1, 0.24, 0.43, 1)
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+text = "INIMIGO"
+
+[node name="InimigoOpcao" type="OptionButton" parent="PainelDebug"]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 434.0
+offset_right = 420.0
+offset_bottom = 470.0
+
+[node name="BotaoComecar" type="Button" parent="PainelDebug"]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 520.0
+offset_right = 370.0
+offset_bottom = 580.0
+theme_override_colors/font_color = Color(0.207843, 0.890196, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_botao")
+text = "COMEÇAR"

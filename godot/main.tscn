@@ -1,20 +1,51 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://scripts/battle.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/hud/icon_player.png" id="2_moldura_jogador"]
+[ext_resource type="Texture2D" path="res://assets/hud/icon_attack.png" id="3_icon_atacar"]
+[ext_resource type="Texture2D" path="res://assets/hud/icon_ultimate.png" id="4_icon_habilidade"]
+[ext_resource type="Texture2D" path="res://assets/hud/icon_heal.png" id="5_icon_itens"]
+[ext_resource type="Texture2D" path="res://assets/hud/icon_run_away.png" id="6_icon_fugir"]
+[ext_resource type="Texture2D" path="res://assets/hud/barra_de_vida.png" id="7_barra_vida"]
+[ext_resource type="Texture2D" path="res://assets/hud/vida_inside.png" id="8_vida_inside"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vida"]
 bg_color = Color(1, 0.24, 0.43, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_energia"]
 bg_color = Color(0.207843, 0.890196, 1, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_barra_fundo_vida"]
+bg_color = Color(0.070588, 0.039216, 0.090196, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.24, 0.43, 0.3)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_barra_fundo_energia"]
+bg_color = Color(0.054902, 0.078431, 0.098039, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.207843, 0.890196, 1, 0.3)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_botao"]
 bg_color = Color(0.054902, 0.0392157, 0.113725, 1)
@@ -23,10 +54,70 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.207843, 0.890196, 1, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_botao_desabilitado"]
+bg_color = Color(0.054902, 0.0392157, 0.113725, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.352941, 0.352941, 0.388235, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_inimigo"]
+bg_color = Color(0.14, 0.09, 0.2, 0.55)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.24, 0.43, 0.35)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_jogador"]
+bg_color = Color(0.09, 0.13, 0.2, 0.55)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.207843, 0.890196, 1, 0.35)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_log"]
+bg_color = Color(0.07, 0.05, 0.14, 0.6)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.905882, 0.905882, 0.952941, 0.12)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_turno_pill"]
+bg_color = Color(0.07, 0.05, 0.14, 0.75)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.905882, 0.905882, 0.952941, 0.15)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [node name="Battle" type="Control"]
 layout_mode = 3
@@ -42,6 +133,30 @@ layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.0941176, 0.0588235, 0.192157, 1)
+
+[node name="CardInimigo" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 8.0
+offset_right = 520.0
+offset_bottom = 306.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_card_inimigo")
+
+[node name="CardJogador" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 452.0
+offset_right = 520.0
+offset_bottom = 714.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_card_jogador")
+
+[node name="CardLog" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 312.0
+offset_right = 520.0
+offset_bottom = 448.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_card_log")
 
 [node name="NomeInimigo" type="Label" parent="."]
 layout_mode = 0
@@ -61,6 +176,10 @@ offset_bottom = 260.0
 expand_mode = 1
 stretch_mode = 5
 
+[node name="RetratoInimigoAnimado" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(270, 160)
+
 [node name="LabelVidaInimigo" type="Label" parent="."]
 layout_mode = 0
 offset_left = 130.0
@@ -77,15 +196,28 @@ offset_left = 205.0
 offset_top = 268.0
 offset_right = 510.0
 offset_bottom = 298.0
+theme_override_styles/background = SubResource("StyleBoxFlat_barra_fundo_vida")
 theme_override_styles/fill = SubResource("StyleBoxFlat_vida")
 show_percentage = false
 
+[node name="TextoVidaInimigo" type="Label" parent="."]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 268.0
+offset_right = 510.0
+offset_bottom = 298.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "25 / 25"
+
 [node name="LogLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 320.0
-offset_right = 520.0
-offset_bottom = 460.0
+offset_left = 36.0
+offset_top = 324.0
+offset_right = 504.0
+offset_bottom = 444.0
 theme_override_colors/font_color = Color(0.905882, 0.905882, 0.952941, 1)
 theme_override_font_sizes/font_size = 14
 autowrap_mode = 2
@@ -104,102 +236,200 @@ text = "VITÓRIA!"
 
 [node name="NomeJogador" type="Label" parent="."]
 layout_mode = 0
-anchor_right = 1.0
-offset_top = 480.0
-offset_bottom = 514.0
+offset_left = 24.0
+offset_top = 458.0
+offset_right = 260.0
+offset_bottom = 484.0
 theme_override_colors/font_color = Color(0.207843, 0.890196, 1, 1)
-theme_override_font_sizes/font_size = 22
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 0
 
-[node name="RetratoJogador" type="TextureRect" parent="."]
+[node name="MolduraJogador" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 170.0
-offset_top = 520.0
-offset_right = 370.0
-offset_bottom = 720.0
+offset_left = 20.0
+offset_top = 490.0
+offset_right = 190.0
+offset_bottom = 663.0
+texture = ExtResource("2_moldura_jogador")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LabelVidaJogador" type="Label" parent="."]
+[node name="RetratoJogador" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 60.0
-offset_top = 728.0
-offset_right = 130.0
-offset_bottom = 756.0
-theme_override_colors/font_color = Color(0.905882, 0.905882, 0.952941, 1)
-theme_override_font_sizes/font_size = 14
-text = "VIDA"
+offset_left = 42.0
+offset_top = 491.0
+offset_right = 176.0
+offset_bottom = 646.0
+expand_mode = 1
+stretch_mode = 5
 
-[node name="VidaJogador" type="ProgressBar" parent="."]
+[node name="VidaJogador" type="TextureProgressBar" parent="."]
 layout_mode = 0
-offset_left = 135.0
-offset_top = 728.0
-offset_right = 480.0
-offset_bottom = 758.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_vida")
-show_percentage = false
+offset_left = 205.0
+offset_top = 547.0
+offset_right = 520.0
+offset_bottom = 607.0
+texture_under = ExtResource("7_barra_vida")
+texture_progress = ExtResource("8_vida_inside")
+
+[node name="TextoVidaJogador" type="Label" parent="."]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 547.0
+offset_right = 505.0
+offset_bottom = 607.0
+theme_override_colors/font_color = Color(0.141176, 0.0784314, 0.231373, 0.9)
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 2
+vertical_alignment = 1
+text = "40 / 40"
 
 [node name="LabelEnergiaJogador" type="Label" parent="."]
 layout_mode = 0
-offset_left = 60.0
-offset_top = 764.0
-offset_right = 130.0
-offset_bottom = 792.0
+offset_left = 20.0
+offset_top = 678.0
+offset_right = 90.0
+offset_bottom = 702.0
 theme_override_colors/font_color = Color(0.905882, 0.905882, 0.952941, 1)
 theme_override_font_sizes/font_size = 14
 text = "EN"
 
 [node name="EnergiaJogador" type="ProgressBar" parent="."]
 layout_mode = 0
-offset_left = 135.0
-offset_top = 764.0
-offset_right = 480.0
-offset_bottom = 788.0
+offset_left = 95.0
+offset_top = 676.0
+offset_right = 520.0
+offset_bottom = 702.0
+theme_override_styles/background = SubResource("StyleBoxFlat_barra_fundo_energia")
 theme_override_styles/fill = SubResource("StyleBoxFlat_energia")
 show_percentage = false
 
-[node name="BotaoAtacar" type="Button" parent="."]
+[node name="TextoEnergiaJogador" type="Label" parent="."]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 676.0
+offset_right = 520.0
+offset_bottom = 702.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+theme_override_font_sizes/font_size = 11
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "20 / 20"
+
+[node name="PainelTurno" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 722.0
+offset_right = 450.0
+offset_bottom = 749.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_turno_pill")
+
+[node name="TurnoLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 722.0
+offset_right = 450.0
+offset_bottom = 749.0
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "SEU TURNO"
+
+[node name="BotaoAtacar" type="TextureButton" parent="."]
 layout_mode = 0
 offset_left = 10.0
-offset_top = 850.0
-offset_right = 170.0
-offset_bottom = 920.0
-theme_override_colors/font_color = Color(0.207843, 0.890196, 1, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_botao")
-text = "ATACAR"
+offset_top = 760.0
+offset_right = 140.0
+offset_bottom = 890.0
+texture_normal = ExtResource("3_icon_atacar")
+ignore_texture_size = true
+stretch_mode = 4
 
-[node name="BotaoHabilidade" type="Button" parent="."]
+[node name="BotaoHabilidade" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 190.0
-offset_top = 850.0
-offset_right = 350.0
-offset_bottom = 920.0
-theme_override_colors/font_color = Color(0.207843, 0.890196, 1, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_botao")
-theme_override_font_sizes/font_size = 13
-text = "HABILIDADE"
-autowrap_mode = 2
+offset_left = 150.0
+offset_top = 760.0
+offset_right = 280.0
+offset_bottom = 890.0
+texture_normal = ExtResource("4_icon_habilidade")
+ignore_texture_size = true
+stretch_mode = 4
 
-[node name="BotaoFugir" type="Button" parent="."]
+[node name="CustoHabilidadeLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 370.0
-offset_top = 850.0
-offset_right = 530.0
-offset_bottom = 920.0
+offset_left = 150.0
+offset_top = 892.0
+offset_right = 280.0
+offset_bottom = 910.0
 theme_override_colors/font_color = Color(0.207843, 0.890196, 1, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_botao")
-text = "FUGIR"
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+text = "8 EN"
+
+[node name="BotaoItens" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 290.0
+offset_top = 760.0
+offset_right = 420.0
+offset_bottom = 890.0
+texture_normal = ExtResource("5_icon_itens")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="BotaoFugir" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 785.0
+offset_right = 510.0
+offset_bottom = 865.0
+texture_normal = ExtResource("6_icon_fugir")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="BotaoContinuar" type="Button" parent="."]
 visible = false
 layout_mode = 0
 offset_left = 170.0
-offset_top = 850.0
+offset_top = 780.0
 offset_right = 370.0
-offset_bottom = 920.0
+offset_bottom = 850.0
 theme_override_colors/font_color = Color(0.207843, 0.890196, 1, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_botao")
 text = "CONTINUAR"
+
+[node name="PainelItens" type="Control" parent="."]
+visible = false
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Fundo" type="Panel" parent="PainelItens"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 760.0
+offset_right = 530.0
+offset_bottom = 910.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_card_log")
+
+[node name="BotaoPocaoCura" type="Button" parent="PainelItens"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 760.0
+offset_right = 530.0
+offset_bottom = 830.0
+theme_override_colors/font_color = Color(0.207843, 0.890196, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_botao")
+text = "POÇÃO DE CURA (x2)"
+
+[node name="BotaoVoltarItens" type="Button" parent="PainelItens"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 840.0
+offset_right = 530.0
+offset_bottom = 910.0
+theme_override_colors/font_color = Color(1, 0.24, 0.43, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_botao")
+text = "VOLTAR"
 
 [node name="PainelDebug" type="Control" parent="."]
 layout_mode = 0

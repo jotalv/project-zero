@@ -1,0 +1,134 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/mundo.gd" id="1_mundo"]
+[ext_resource type="Script" path="res://scripts/mapa_visual.gd" id="2_mapa_visual"]
+[ext_resource type="Script" path="res://scripts/mundo_jogador.gd" id="3_mundo_jogador"]
+[ext_resource type="Texture2D" path="res://assets/sprites/jogador.png" id="4_jogador_sprite"]
+[ext_resource type="Script" path="res://scripts/dialogo_batalha.gd" id="5_dialogo_batalha"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_painel_dialogo"]
+bg_color = Color(0.054902, 0.0392157, 0.113725, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.207843, 0.890196, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_botao_dialogo"]
+bg_color = Color(0.054902, 0.0392157, 0.113725, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.207843, 0.890196, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_mundo")
+
+[node name="Chao" type="Node2D" parent="."]
+script = ExtResource("2_mapa_visual")
+
+[node name="Entidades" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Obstaculo1" type="Node2D" parent="Entidades"]
+position = Vector2(0, 96)
+
+[node name="Polygon2D" type="Polygon2D" parent="Entidades/Obstaculo1"]
+color = Color(0.45, 0.3, 0.2, 1)
+polygon = PackedVector2Array(0, -16, 32, 0, 0, 16, -32, 0)
+
+[node name="Obstaculo2" type="Node2D" parent="Entidades"]
+position = Vector2(192, 160)
+
+[node name="Polygon2D" type="Polygon2D" parent="Entidades/Obstaculo2"]
+color = Color(0.45, 0.3, 0.2, 1)
+polygon = PackedVector2Array(0, -16, 32, 0, 0, 16, -32, 0)
+
+[node name="Obstaculo3" type="Node2D" parent="Entidades"]
+position = Vector2(-128, 224)
+
+[node name="Polygon2D" type="Polygon2D" parent="Entidades/Obstaculo3"]
+color = Color(0.45, 0.3, 0.2, 1)
+polygon = PackedVector2Array(0, -16, 32, 0, 0, 16, -32, 0)
+
+[node name="Obstaculo4" type="Node2D" parent="Entidades"]
+position = Vector2(32, 272)
+
+[node name="Polygon2D" type="Polygon2D" parent="Entidades/Obstaculo4"]
+color = Color(0.45, 0.3, 0.2, 1)
+polygon = PackedVector2Array(0, -16, 32, 0, 0, 16, -32, 0)
+
+[node name="Obstaculo5" type="Node2D" parent="Entidades"]
+position = Vector2(-192, 160)
+
+[node name="Polygon2D" type="Polygon2D" parent="Entidades/Obstaculo5"]
+color = Color(0.45, 0.3, 0.2, 1)
+polygon = PackedVector2Array(0, -16, 32, 0, 0, 16, -32, 0)
+
+[node name="Item" type="Node2D" parent="Entidades"]
+position = Vector2(96, 144)
+
+[node name="Polygon2D" type="Polygon2D" parent="Entidades/Item"]
+color = Color(1, 0.85, 0.2, 1)
+polygon = PackedVector2Array(0, -8, 16, 0, 0, 8, -16, 0)
+
+[node name="Player" type="Node2D" parent="Entidades"]
+script = ExtResource("3_mundo_jogador")
+
+[node name="Sprite2D" type="Sprite2D" parent="Entidades/Player"]
+texture = ExtResource("4_jogador_sprite")
+scale = Vector2(0.04, 0.04)
+offset = Vector2(0, -800)
+
+[node name="Camera2D" type="Camera2D" parent="Entidades/Player"]
+current = true
+
+[node name="DialogoBatalha" type="CanvasLayer" parent="."]
+script = ExtResource("5_dialogo_batalha")
+
+[node name="Painel" type="Panel" parent="DialogoBatalha"]
+offset_left = 70.0
+offset_top = 420.0
+offset_right = 470.0
+offset_bottom = 620.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_painel_dialogo")
+
+[node name="Label" type="Label" parent="DialogoBatalha/Painel"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 380.0
+offset_bottom = 100.0
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.952941, 1)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+text = "Um inimigo apareceu!
+Deseja batalhar?"
+
+[node name="BotaoSim" type="Button" parent="DialogoBatalha/Painel"]
+offset_left = 20.0
+offset_top = 120.0
+offset_right = 190.0
+offset_bottom = 180.0
+theme_override_colors/font_color = Color(0.207843, 0.890196, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_botao_dialogo")
+text = "SIM"
+
+[node name="BotaoNao" type="Button" parent="DialogoBatalha/Painel"]
+offset_left = 210.0
+offset_top = 120.0
+offset_right = 380.0
+offset_bottom = 180.0
+theme_override_colors/font_color = Color(1, 0.24, 0.43, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_botao_dialogo")
+text = "NÃO"

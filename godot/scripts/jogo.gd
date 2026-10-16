@@ -101,7 +101,9 @@ func _ao_terminar_delay_turno_inimigo() -> void:
 	estado_mudou.emit()
 
 func iniciar_batalha(inimigo_id: String, personagem_id: String = "jogador") -> void:
-	personagem_atual = PERSONAGENS[personagem_id]
+	personagem_atual = PERSONAGENS[personagem_id].duplicate()
+	if personagem_id == "jogador" and Personagem.nome != "":
+		personagem_atual.nome = Personagem.nome
 	inimigo_atual = INIMIGOS[inimigo_id]
 	hp_jogador = personagem_atual.hp_max
 	hp_inimigo = inimigo_atual.hp_max

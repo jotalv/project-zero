@@ -16,6 +16,12 @@ var item_coletado := false
 
 @onready var item_visual: Node2D = $Entidades/Item
 @onready var dialogo: CanvasLayer = $DialogoBatalha
+@onready var botao_personagem: Button = $Hud/BotaoPersonagem
+
+func _ready() -> void:
+	botao_personagem.pressed.connect(func():
+		get_tree().change_scene_to_file("res://criar_personagem.tscn")
+	)
 
 func esta_livre(celula: Vector2i) -> bool:
 	if celula.x < 0 or celula.x >= COLUNAS or celula.y < 0 or celula.y >= LINHAS:

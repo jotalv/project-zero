@@ -10,6 +10,8 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+# export Web do Godot (gerado por npm run build:jogo)
+public/jogo
 *.local
 .env
 

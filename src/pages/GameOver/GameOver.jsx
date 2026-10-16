@@ -7,7 +7,7 @@ function GameOver() {
 
   const handleVoltar = () => {
     resetarBatalha();
-    navigate('/mundo', { replace: true });
+    navigate('/missoes', { replace: true });
   };
 
   return (
@@ -16,7 +16,7 @@ function GameOver() {
         <h1 style={styles.titulo}>VOCÊ FOI DERROTADO</h1>
         <p style={styles.subtitulo}>O vírus foi mais forte dessa vez.</p>
         <button type="button" className="neon-button" onClick={handleVoltar}>
-          VOLTAR AO MUNDO
+          VOLTAR ÀS MISSÕES
         </button>
       </div>
     </div>

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/mundo.gd" id="1_mundo"]
 [ext_resource type="Script" path="res://scripts/mapa_visual.gd" id="2_mapa_visual"]
 [ext_resource type="Script" path="res://scripts/mundo_jogador.gd" id="3_mundo_jogador"]
-[ext_resource type="Texture2D" path="res://assets/sprites/jogador.png" id="4_jogador_sprite"]
+[ext_resource type="Script" path="res://scripts/boneco.gd" id="4_boneco"]
 [ext_resource type="Script" path="res://scripts/dialogo_batalha.gd" id="5_dialogo_batalha"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_painel_dialogo"]
@@ -84,10 +84,9 @@ polygon = PackedVector2Array(0, -8, 16, 0, 0, 8, -16, 0)
 [node name="Player" type="Node2D" parent="Entidades"]
 script = ExtResource("3_mundo_jogador")
 
-[node name="Sprite2D" type="Sprite2D" parent="Entidades/Player"]
-texture = ExtResource("4_jogador_sprite")
-scale = Vector2(0.04, 0.04)
-offset = Vector2(0, -800)
+[node name="Boneco" type="Node2D" parent="Entidades/Player"]
+scale = Vector2(2, 2)
+script = ExtResource("4_boneco")
 
 [node name="Camera2D" type="Camera2D" parent="Entidades/Player"]
 current = true
@@ -132,3 +131,18 @@ offset_bottom = 180.0
 theme_override_colors/font_color = Color(1, 0.24, 0.43, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_botao_dialogo")
 text = "NÃO"
+
+[node name="Hud" type="CanvasLayer" parent="."]
+
+[node name="BotaoPersonagem" type="Button" parent="Hud"]
+offset_left = 330.0
+offset_top = 20.0
+offset_right = 520.0
+offset_bottom = 72.0
+focus_mode = 0
+theme_override_colors/font_color = Color(0.207843, 0.890196, 1, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_botao_dialogo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_botao_dialogo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_botao_dialogo")
+text = "PERSONAGEM"

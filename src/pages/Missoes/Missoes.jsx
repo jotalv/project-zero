@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useGame } from '../../context/GameContext';
 import { MISSOES } from '../../data/quests';
 
-function World() {
+function Missoes() {
   const navigate = useNavigate();
   const { iniciarBatalha } = useGame();
 
@@ -15,7 +15,7 @@ function World() {
     <div style={styles.container}>
       <div style={styles.window}>
         <div style={styles.topBar}>
-          <h1 style={styles.titulo}>MUNDO CYBER</h1>
+          <h1 style={styles.titulo}>MISSÕES</h1>
           <button type="button" onClick={() => navigate('/home')} style={styles.voltarButton}>
             VOLTAR
           </button>
@@ -121,4 +121,4 @@ const styles = {
   },
 };
 
-export default World;
+export default Missoes;

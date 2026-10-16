@@ -7,9 +7,9 @@ import enterWorldImg from '../../assets/home/enter-world.png';
 import enterWorldHoverImg from '../../assets/home/enter-world-hover.png';
 
 const OPCOES_MENU = [
-  { chave: 'missoes', titulo: 'MISSÕES', disponivel: false },
+  { chave: 'missoes', titulo: 'MISSÕES', disponivel: true, rota: '/missoes' },
   { chave: 'personagem', titulo: 'PERSONAGEM', disponivel: true, rota: '/personagem' },
-  { chave: 'config', titulo: 'CONFIGURAÇÕES', disponivel: false },
+  { chave: 'config', titulo: 'CONFIGURAÇÕES', disponivel: true, rota: '/configuracoes' },
 ];
 
 function Home() {
@@ -60,7 +60,7 @@ function Home() {
           <h1 style={styles.logo}>PROJECT ZERO</h1>
 
           <div style={styles.enterWorldWrap}>
-            <button type="button" className="art-button" onClick={() => navigate('/mundo')}>
+            <button type="button" className="art-button" onClick={() => navigate('/jogo')}>
               <img src={enterWorldImg} alt="Entrar no mundo cyber" className="default-img" />
               <img src={enterWorldHoverImg} alt="" className="hover-img" />
             </button>

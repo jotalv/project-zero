@@ -12,14 +12,14 @@ function Battle() {
 
   useEffect(() => {
     if (!estado.inimigo) {
-      navigate('/mundo', { replace: true });
+      navigate('/missoes', { replace: true });
       return;
     }
     if (estado.resultado === 'derrota') {
       navigate('/game-over', { replace: true });
     } else if (estado.resultado === 'fuga') {
       resetarBatalha();
-      navigate('/mundo', { replace: true });
+      navigate('/missoes', { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [estado.resultado, estado.inimigo]);
@@ -28,7 +28,7 @@ function Battle() {
 
   const handleContinuar = () => {
     resetarBatalha();
-    navigate('/mundo', { replace: true });
+    navigate('/missoes', { replace: true });
   };
 
   return (
@@ -83,7 +83,7 @@ function Battle() {
             <div style={styles.resultado}>
               <p style={styles.resultadoTexto}>VITÓRIA! +{estado.xpGanha} XP</p>
               <button type="button" className="neon-button" onClick={handleContinuar}>
-                VOLTAR AO MUNDO
+                VOLTAR ÀS MISSÕES
               </button>
             </div>
           ) : (

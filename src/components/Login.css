@@ -4,14 +4,14 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: #0b0614; /* Fundo ainda mais escuro e profundo */
+  background-color: #0b0614;
   font-family: 'Courier New', Courier, monospace, sans-serif;
   color: #fff;
   overflow: hidden;
   position: relative;
 }
 
-/* Efeito de CRT / Scanlines (linhas finas cruzando o monitor) */
+
 .crt-scanlines {
   position: absolute;
   top: 0;
@@ -79,7 +79,7 @@
   background: transparent;
   border: none;
   outline: none;
-  color: #a3ff00; /* Texto digitado em verde limão para dar estilo terminal */
+  color: #a3ff00; 
   font-family: inherit;
   font-size: clamp(0.8rem, 1.2vw, 1.2rem);
   width: 100%;
@@ -89,7 +89,7 @@
 }
 
 .cyber-input::placeholder {
-  color: rgba(0, 240, 255, 0.4); /* Placeholder em ciano apagado */
+  color: rgba(0, 240, 255, 0.4); 
   font-size: clamp(0.7rem, 1vw, 1rem);
 }
 

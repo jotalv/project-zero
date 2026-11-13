@@ -1,48 +1,53 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Ranking.css';
 
 export function Ranking() {
   const navigate = useNavigate();
 
-  // Dados simulados (placeholders) no estilo do sistema
-  const [rankingData, setRankingData] = useState([
-    { id: 1, nome: 'Sahur', pontos: 2450 },
-    { id: 2, nome: 'Jota', pontos: 2120 },
-    { id: 3, nome: 'Bolsotron', pontos: 1890 },
-    { id: 4, nome: 'Donald Trump', pontos: 1340 },
-    { id: 5, nome: 'Danilo', pontos: 950 },
-  ]);
-
-  // Ordena os jogadores automaticamente do maior para o menor ponto
-  const sortedRanking = [...rankingData].sort((a, b) => b.pontos - a.pontos);
+  // Dados dos principais agentes sem a propriedade de status
+  const topAgents = [
+    { rank: '01', name: 'LulaDroid', score: '98450' },
+    { rank: '02', name: 'Joao Careca', score: '87200' },
+    { rank: '03', name: 'Danilo Femboy', score: '76100' },
+    { rank: '04', name: 'Bolsotron', score: '65400' },
+    { rank: '05', name: 'Arroz cadele', score: '54300' },
+  ];
 
   return (
     <div className="ranking-container">
-      <div className="ranking-terminal-box">
-        {/* Banner Superior Estilo Tech */}
-        <div className="ranking-header-banner">
-          <h2>RANKING//</h2>
-          <span className="ranking-subtitle">[ TOP AGENTES DO SISTEMA ]</span>
+      <div className="crt-scanlines"></div>
+
+      <div className="ranking-hud-panel">
+        <div className="ranking-header">
+          <h2>// CLASSIFICAÇÃO GLOBAL DE AGENTES</h2>
+          <span className="sub-header">SETOR DE SEGURANÇA // TOP 5 REGISTOS</span>
         </div>
 
-        {/* Lista de Jogadores */}
-        <div className="ranking-list">
-          {sortedRanking.map((player, index) => (
-            <div key={player.id} className={`ranking-item pos-${index + 1}`}>
-              <div className="player-info">
-                <span className="pos">0{index + 1}//</span>
-                <span className="name">{player.nome}</span>
+        <div className="ranking-table-wrapper">
+          {/* Cabeçalho ajustado para 3 colunas */}
+          <div className="table-header-row">
+            <span>RANK//</span>
+            <span>AGENTE//</span>
+            <span>PONTUAÇÃO//</span>
+          </div>
+
+          <div className="table-body">
+            {topAgents.map((agent, index) => (
+              <div key={index} className={`ranking-row rank-${agent.rank}`}>
+                <span className="col-rank">#{agent.rank}</span>
+                <span className="col-name">{agent.name}</span>
+                <span className="col-score">{agent.score} PTS</span>
               </div>
-              <span className="points">{player.pontos} PTS</span>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
-        {/* Botão de Voltar com gradiente do jogo */}
-        <button className="cyber-back-btn" onClick={() => navigate('/')}>
-          &lt; VOLTAR AO MENU
-        </button>
+        <div className="ranking-footer">
+          <button onClick={() => navigate('/')} className="back-btn">
+            &lt; RETORNAR AO MENU PRINCIPAL
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,110 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #160e29;
+  font-family: 'Courier New', Courier, monospace, sans-serif;
+  color: #fff;
+  overflow: hidden; /* Evita barras de rolagem */
+}
+
+/* Mantém a proporção 16:9 exata da imagem preenchendo a tela toda */
+.login-image-container {
+  position: relative;
+  width: 100vw;
+  height: 56.25vw; /* Proporção 16:9 baseada na largura */
+  max-height: 100vh;
+  max-width: 177.78vh; /* Proporção 16:9 baseada na altura */
+}
+
+.login-frame-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.login-form-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cyber-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: clamp(0.8rem, 1.2vw, 1.2rem); /* A fonte cresce junto com a tela */
+  width: 100%;
+  height: 100%;
+  padding: 0 15px;
+}
+
+/* Posições recalculadas para a imagem inteira preenchendo a tela */
+.user-group {
+  position: absolute;
+  top: 33.5%;
+  left: 37.5%;
+  width: 24.5%;
+  height: 4.5%;
+}
+
+.password-group {
+  position: absolute;
+  top: 47.2%;
+  left: 37.5%;
+  width: 24.5%;
+  height: 4.5%;
+}
+
+.form-actions {
+  position: absolute;
+  top: 54.5%;
+  left: 37.5%;
+  width: 24.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2vh;
+}
+
+.link-text {
+  color: #00f0ff;
+  font-size: clamp(0.6rem, 0.8vw, 0.85rem);
+  cursor: pointer;
+  letter-spacing: 1px;
+  text-decoration: underline;
+}
+
+.link-text:hover {
+  color: #a3ff00;
+}
+
+.login-submit-btn {
+  background: linear-gradient(90deg, #a3ff00, #00f0ff);
+  color: #0f071e;
+  border: none;
+  font-weight: bold;
+  font-size: clamp(0.8rem, 1vw, 1.1rem);
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-transform: uppercase;
+  width: 100%;
+  padding: 1.2vh;
+  transition: opacity 0.2s;
+}
+
+.login-submit-btn:hover {
+  opacity: 0.9;
+}
+
+.register-redirect {
+  text-align: center;
+}

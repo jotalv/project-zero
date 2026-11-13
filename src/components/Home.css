@@ -3,76 +3,74 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  background-color: #160e29;
+  font-family: 'Courier New', Courier, monospace, sans-serif;
   color: #fff;
   padding: 20px;
-  box-sizing: border-box;
 }
 
-.home-card {
+.home-cyber-card {
+  background: #1f1438;
+  border: 2px solid #5b21b6;
+  padding: 40px 30px;
+  border-radius: 6px;
   width: 100%;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
+  max-width: 420px;
+  box-shadow: 0 0 25px rgba(91, 33, 182, 0.4), inset 0 0 15px rgba(0, 0, 0, 0.6);
   text-align: center;
 }
 
+.logo-container {
+  margin-bottom: 35px;
+}
+
 .game-title {
-  font-size: 2.5rem;
-  font-weight: 900;
+  font-size: 2.2rem;
+  color: #a3ff00;
+  margin: 0 0 5px 0;
   letter-spacing: 3px;
-  color: #a855f7;
-  text-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
-  margin: 0;
+  text-shadow: 0 0 10px rgba(163, 255, 0, 0.4);
 }
 
 .game-subtitle {
-  font-size: 0.9rem;
-  color: #94a3b8;
-  margin-top: 5px;
-  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: #00f0ff;
   letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .menu-buttons {
-  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.menu-btn {
+.cyber-btn {
   width: 100%;
-  padding: 16px;
-  font-size: 1.1rem;
+  padding: 14px;
   font-weight: bold;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  font-size: 0.95rem;
   letter-spacing: 1px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: none;
+  text-transform: uppercase;
+  transition: transform 0.1s, opacity 0.2s;
 }
 
 .primary-btn {
-  background-color: #9333ea;
-  color: #ffffff;
-  box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4);
-}
-
-.primary-btn:active {
-  transform: scale(0.97);
-  background-color: #7e22ce;
+  background: linear-gradient(90deg, #a3ff00, #00f0ff);
+  color: #0f071e;
+  box-shadow: 0 0 12px rgba(163, 255, 0, 0.3);
 }
 
 .secondary-btn {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #e2e8f0;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #27194a;
+  color: #00f0ff;
+  border: 1px solid #00f0ff;
 }
 
-.secondary-btn:active {
-  transform: scale(0.97);
-  background-color: rgba(255, 255, 255, 0.2);
+.cyber-btn:hover {
+  opacity: 0.92;
+  transform: scale(1.02);
 }

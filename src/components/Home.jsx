@@ -7,33 +7,34 @@ export function Home() {
 
   return (
     <div className="home-container">
-      <div className="home-card">
+      <div className="home-cyber-card">
         {/* Logótipo / Título do Jogo */}
         <div className="logo-container">
           <h1 className="game-title">PROJECT ZERO</h1>
+          <span className="game-subtitle"></span>
         </div>
 
         {/* Botões do Menu */}
         <div className="menu-buttons">
           <button 
-            className="menu-btn primary-btn"
+            className="cyber-btn primary-btn"
             onClick={() => navigate('/login')}
           >
-            JOGAR
+            JOGAR &gt;
           </button>
 
           <button 
-            className="menu-btn secondary-btn"
+            className="cyber-btn secondary-btn"
             onClick={() => navigate('/ranking')}
           >
-            RANKING
+            RANKING &gt;
           </button>
 
           <button 
-            className="menu-btn secondary-btn"
+            className="cyber-btn secondary-btn"
             onClick={() => alert('Configurações em breve!')}
           >
-            CONFIGURAÇÕES
+            CONFIGURAÇÕES &gt;
           </button>
         </div>
       </div>

@@ -24,6 +24,13 @@ export function Home() {
 
           <button 
             className="menu-btn secondary-btn"
+            onClick={() => navigate('/ranking')}
+          >
+            RANKING
+          </button>
+
+          <button 
+            className="menu-btn secondary-btn"
             onClick={() => alert('Configurações em breve!')}
           >
             CONFIGURAÇÕES

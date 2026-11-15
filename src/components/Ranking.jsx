@@ -10,7 +10,7 @@ export function Ranking() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // O responsável pelo banco dos daods la deve substituir isso pela requisição real
+    // O responsável pelo banco dos dados la deve substituir isso pela requisição real
     const fetchRanking = async () => {
       try {
        
@@ -76,7 +76,7 @@ export function Ranking() {
 
         <div className="ranking-footer">
           <button onClick={() => navigate('/')} className="back-btn">
-            &lt; DESCONECTAR DO TERMINAL
+            &lt; VOLTAR AO MENU
           </button>
         </div>
       </div>

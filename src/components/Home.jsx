@@ -37,7 +37,7 @@ export function Home() {
         </div>
 
         <div className="terminal-footer">
-          <span>STATUS: ENCRYPTED // SECURE_CHANNEL: ACTIVE</span>
+          <span></span>
         </div>
       </div>
     </div>

@@ -1,51 +1,82 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Ranking.css';
 
 export function Ranking() {
   const navigate = useNavigate();
+  
+  //aguardando os dados reais do banco
+  const [rankingData, setRankingData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Dados dos principais agentes sem a propriedade de status
-  const topAgents = [
-    { rank: '01', name: 'LulaDroid', score: '98450' },
-    { rank: '02', name: 'Joao Careca', score: '87200' },
-    { rank: '03', name: 'Danilo Femboy', score: '76100' },
-    { rank: '04', name: 'Bolsotron', score: '65400' },
-    { rank: '05', name: 'Arroz cadele', score: '54300' },
-  ];
+  useEffect(() => {
+    // O responsável pelo banco dos daods la deve substituir isso pela requisição real
+    const fetchRanking = async () => {
+      try {
+       
+        
+        setRankingData([]); // Mantém vazio até conectar
+      } catch (error) {
+        console.error('Erro ao buscar ranking:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRanking();
+  }, []);
 
   return (
     <div className="ranking-container">
       <div className="crt-scanlines"></div>
+      <div className="cyber-grid-bg"></div>
 
       <div className="ranking-hud-panel">
+        <div className="terminal-top-bar">
+          <span className="blink-dot">●</span> HOST: PROJECT_ZERO_RANKING
+        </div>
+
         <div className="ranking-header">
-          <h2>// CLASSIFICAÇÃO GLOBAL DE AGENTES</h2>
-          <span className="sub-header">SETOR DE SEGURANÇA // TOP 5 REGISTOS</span>
+          <h2>// REGISTOS GLOBAIS</h2>
+          <span className="sub-header">TOP AGENTES DA REDE</span>
         </div>
 
         <div className="ranking-table-wrapper">
-          {/* Cabeçalho ajustado para 3 colunas */}
           <div className="table-header-row">
             <span>RANK//</span>
-            <span>AGENTE//</span>
+            <span>ID//</span>
             <span>PONTUAÇÃO//</span>
           </div>
 
           <div className="table-body">
-            {topAgents.map((agent, index) => (
-              <div key={index} className={`ranking-row rank-${agent.rank}`}>
-                <span className="col-rank">#{agent.rank}</span>
-                <span className="col-name">{agent.name}</span>
-                <span className="col-score">{agent.score} PTS</span>
+            {loading ? (
+              <div className="ranking-row" style={{ gridColumn: '1 / -1', justifyContent: 'center', color: '#00f0ff' }}>
+                CARREGANDO REGISTOS DO SERVIDOR...
               </div>
-            ))}
+            ) : rankingData.length === 0 ? (
+              <div className="ranking-row" style={{ gridColumn: '1 / -1', justifyContent: 'center', color: 'rgba(255,255,255,0.5)' }}>
+                NENHUM REGISTO ENCONTRADO NA BASE DE DADOS.
+              </div>
+            ) : (
+              rankingData.map((agent, index) => (
+                <div 
+                  key={agent.id || index} 
+                  className={`ranking-row ${index === 0 ? 'elite-top-agent' : ''}`}
+                >
+                  <span className="col-rank">#{String(index + 1).padStart(2, '0')}</span>
+                  <span className="col-id">{agent.id || 'N/A'}</span>
+                  <span className="col-name">{agent.name}</span>
+                  <span className="col-clearance">{agent.clearance || 'USER'}</span>
+                  <span className="col-score">{agent.score} PTS</span>
+                </div>
+              ))
+            )}
           </div>
         </div>
 
         <div className="ranking-footer">
           <button onClick={() => navigate('/')} className="back-btn">
-            &lt; RETORNAR AO MENU PRINCIPAL
+            &lt; DESCONECTAR DO TERMINAL
           </button>
         </div>
       </div>

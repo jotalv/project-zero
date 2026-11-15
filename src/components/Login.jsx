@@ -8,21 +8,36 @@ export function Login() {
   const [systemMessage, setSystemMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       setSystemMessage('ERRO: CREDENCIAIS INCOMPLETAS//');
       return;
     }
-    setSystemMessage('AUTENTICANDO ACESSO...');
-    setTimeout(() => {
-      navigate('/dashboard');
-    }, 1000);
+
+    setSystemMessage('CONECTANDO AO SERVIDOR...');
+
+    try {
+      // TODO: O responsável pelo banco de dados deve encaixar a chamada de login aqui
+      // Exemplo:
+      // const response = await fetch('URL_DO_BACKEND/login', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ email, password })
+      // });
+      // if (!response.ok) throw new Error('Credenciais inválidas');
+      // const data = await response.json();
+      // localStorage.setItem('token', data.token);
+      // navigate('/dashboard');
+
+      setSystemMessage('AGUARDANDO INTEGRAÇÃO COM BANCO DE DADOS//');
+    } catch (error) {
+      setSystemMessage('ACESSO NEGADO: CREDENCIAIS INVÁLIDAS//');
+    }
   };
 
   return (
     <div className="login-container">
-      {/* Camada de linhas de CRT / Scanlines para o efeito retro-futurista */}
       <div className="crt-scanlines"></div>
 
       <div className="login-image-container">
@@ -30,7 +45,6 @@ export function Login() {
         
         <form onSubmit={handleLogin} className="login-form-overlay">
           
-          {/* Mensagem de status do sistema ao vivo */}
           {systemMessage && (
             <div className="terminal-feedback">
               <span>{systemMessage}</span>
